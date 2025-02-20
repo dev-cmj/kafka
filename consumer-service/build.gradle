@@ -1,0 +1,5 @@
+// 추가적인 의존성이나 설정이 필요한 경우에만 작성
+dependencies {
+	// 이 모듈에만 필요한 추가 의존성이 있다면 여기에 작성
+	implementation project(':common')  // common 모듈 의존성 추가
+}

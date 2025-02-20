@@ -1,0 +1,6 @@
+bootJar { enabled = false }  // common 모듈은 실행 가능한 jar가 필요없음
+jar { enabled = true }      // 일반 jar로 생성
+
+dependencies {
+    // common 모듈에만 필요한 추가 의존성이 있다면 여기 추가
+}
