@@ -27,6 +27,12 @@ subprojects {
         implementation 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.h2database:h2'  // 테스트용 인메모리 DB
+
+        //valid
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
         implementation 'com.fasterxml.jackson.core:jackson-databind'
     }
 }
