@@ -1,6 +1,5 @@
-package com.example.producer.user;
+package com.example.producer.auth;
 
-import com.example.common.entity.UserMessage;
 import com.example.common.vo.LoginRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +9,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping("/api/auth")
 @RestController
-@RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class UserController {
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest request) {
+        String accessToken = authService.login(request);
+        return ResponseEntity.ok(accessToken);
+    }
+
 }

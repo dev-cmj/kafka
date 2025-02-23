@@ -3,4 +3,5 @@ jar { enabled = true }      // 일반 jar로 생성
 
 dependencies {
     // common 모듈에만 필요한 추가 의존성이 있다면 여기 추가
+    implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '6.4.3'
 }

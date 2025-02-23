@@ -33,15 +33,8 @@ public class MessageListener {
             // payload를 다시 구체적인 타입으로 변환
             String payloadJson = objectMapper.writeValueAsString(message.getPayload());
 
-            if (message.getPayload() instanceof LinkedHashMap) {
-                // payload 타입에 따라 처리
-                LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) message.getPayload();
-                if (map.containsKey("userId")) {  // UserMessage인 경우
-                    UserMessage userMessage = objectMapper.readValue(payloadJson, UserMessage.class);
-                    processUserMessage(userMessage);
-                }
-                // 다른 타입의 메시지도 추가 가능
-            }
+            UserMessage userMessage = objectMapper.readValue(payloadJson, UserMessage.class);
+            processUserMessage(userMessage);
 
         } catch (Exception e) {
             log.error("Error processing message: {}", e.getMessage(), e);

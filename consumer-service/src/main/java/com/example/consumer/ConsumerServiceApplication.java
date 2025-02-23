@@ -1,12 +1,13 @@
 package com.example.consumer;
 
+import com.example.common.config.CommonConfig;
 import com.example.common.jpa.JpaConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import(JpaConfig.class)
+@Import({JpaConfig.class, CommonConfig.class})
 public class ConsumerServiceApplication {
 
 	public static void main(String[] args) {

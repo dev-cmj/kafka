@@ -1,16 +1,32 @@
 package com.example.producer.user;
 
 import com.example.common.entity.UserMessage;
+import com.example.common.entity.user.InvalidUserException;
+import com.example.common.entity.user.User;
+import com.example.common.entity.user.UserRepository;
+import com.example.common.vo.LoginRequest;
 import com.example.producer.message.MessageProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final MessageProducer messageProducer;
+
+    public String login(LoginRequest request) {
+        var findUser = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new InvalidUserException("User not found"));
+
+        findUser.validatePassword(request.getPassword(), findUser.getPassword(),
+                passwordEncoder);
+    }
 
     public void processUser(UserMessage userMessage) {
         // 사용자 데이터 가공
