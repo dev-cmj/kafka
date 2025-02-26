@@ -36,7 +36,6 @@ public class JwtTokenProvider {
                 .subject(userDetails.getUsername())
                 .issuedAt(now)
                 .expiration(expiryDate)
-                .issuer(jwtProperties.getAccessToken().getIssuer())
                 .audience();
 
         Claims claims = claimsBuilder.and().build();
@@ -66,4 +65,18 @@ public class JwtTokenProvider {
         }
         return false;
     }
+
+    public Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String getUserId(String token) {
+        return getClaims(token).getSubject();
+    }
+
+
 }
